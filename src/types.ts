@@ -4,12 +4,13 @@ type Individuals = Predicates;
 type Predicates = { [index: string]: string };
 export type Domain = {
   plans: PlanInfo[];
-  predicates: Predicates;
-  individuals: Individuals;
+  predicates: Predicates; // Mapping from predicate to sort
+  individuals: Individuals; // Mapping from individual to sort
 };
 
+
 export type PlanInfo = {
-  type: string;
+  type: "action" | "issue";
   content: null | Proposition | ShortAnswer | Question;
   plan: Action[];
 };
@@ -47,7 +48,7 @@ export type Move = OtherMove | AnswerMove | AskMove;
 export type Action = {
   type:
     | "greet"
-    | "respond"
+    | "respond" // not to be used in plans
     | "raise"
     | "findout"
     | "consultDB";
