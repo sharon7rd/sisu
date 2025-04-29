@@ -111,6 +111,7 @@ describe("DME tests", () => {
     test.each(turns)("$speaker> $message", async (turn) => {
       expectedSoFar.push(turn);
       if (turn.speaker === "usr") {
+        console.info("user input: ", turn.message);
         actor.send({ type: "INPUT", value: turn.message });
       }
       const snapshot = await waitFor(
