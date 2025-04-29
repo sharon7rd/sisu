@@ -47,11 +47,13 @@ export const dme = setup({
     isu: assign(({ context }, params: { name: string }) => {
       let ruleName = params.name;
       let newIS = rules[ruleName](context)!(); // we assume that this is never called without a guard
-      console.info(`[ISU ${ruleName}]`, newIS);
+      console.info(`[ISU ${ruleName}]`);
+      console.dir(newIS, { depth: null, colors: true });
       return { is: newIS };
     }),
     updateLatestMoves: assign(({ context, event }) => {
-      console.info("[DM updateLatestMoves]", event);
+      console.info("[DM updateLatestMoves]");
+      console.dir(event, { depth: null, colors: true });
       return {
         latest_moves: (event as SaysMovesEvent).value.moves,
         latest_speaker: (event as SaysMovesEvent).value.speaker,
