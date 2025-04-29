@@ -22,36 +22,6 @@ export const initialIS = (): InformationState => {
     domain: {
       predicates: predicates,
       individuals: individuals,
-      relevant: (a, q) => {
-        if (
-          typeof a === "string" &&
-          predicates[q.predicate] === individuals[a]
-        ) {
-          return true;
-        }
-        if (typeof a === "object" && q.predicate === a.predicate) {
-          return true;
-        }
-        return false;
-      },
-      resolves: (a, q) => {
-        if (typeof a === "object" && q.predicate === a.predicate) {
-          return true;
-        }
-        return false;
-      },
-      combine: (q, a) => {
-        if (
-          typeof a === "string" &&
-          predicates[q.predicate] === individuals[a]
-        ) {
-          return { predicate: q.predicate, argument: a };
-        }
-        if (typeof a === "object" && q.predicate === a.predicate) {
-          return a;
-        }
-        throw new Error("Combine failed.");
-      },
       plans: [
         {
           type: "issue",

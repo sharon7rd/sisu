@@ -3,9 +3,6 @@ import { SpeechStateExternalEvent } from "speechstate";
 type Individuals = Predicates;
 type Predicates = { [index: string]: string };
 export type Domain = {
-  combine: (q: Question, y: ShortAnswer | Proposition) => Proposition;
-  relevant: (x: ShortAnswer | Proposition, q: Question) => boolean;
-  resolves: (x: ShortAnswer | Proposition, q: Question) => boolean;
   plans: PlanInfo[];
   predicates: Predicates;
   individuals: Individuals;

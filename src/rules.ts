@@ -5,6 +5,7 @@ import {
   Move,
   Action,
 } from "./types";
+import { relevant, resolves, combine } from "./semantics";
 import { objectsEqual } from "./utils";
 
 type Rules = {
@@ -113,8 +114,8 @@ export const rules: Rules = {
       for (const move of is.shared.lu!.moves) {
         if (move.type === "answer") {
           const a = move.content;
-          if (is.domain.relevant(a, topQUD)) {
-            let proposition = is.domain.combine(topQUD, a);
+          if (relevant(is.domain, a, topQUD)) {
+            let proposition = combine(is.domain, topQUD, a);
             return () => ({
               ...is,
               shared: {
@@ -150,7 +151,7 @@ export const rules: Rules = {
   downdate_qud: ({ is }) => {
     const q = is.shared.qud[0];
     for (const p of is.shared.com) {
-      if (is.domain.resolves(p, q)) {
+      if (resolves(p, q)) {
         return () => ({
           ...is,
           shared: {
@@ -197,7 +198,7 @@ export const rules: Rules = {
       if (action.type === "findout") {
         const question = action.content as Question;
         for (let proposition of is.shared.com) {
-          if (is.domain.resolves(proposition, question)) {
+          if (resolves(proposition, question)) {
             return () => ({
               ...is,
               private: {
@@ -287,7 +288,7 @@ export const rules: Rules = {
       for (const bel of is.private.bel) {
         if (
           !is.shared.com.some((x) => objectsEqual(x, bel)) &&
-          is.domain.relevant(bel, topQUD)
+          relevant(is.domain, bel, topQUD)
         ) {
           const respondAction: Action = { type: "respond", content: topQUD };
           return () => ({
@@ -308,7 +309,7 @@ export const rules: Rules = {
       for (const bel of is.private.bel) {
         if (
           !is.shared.com.some((x) => objectsEqual(x, bel)) &&
-          is.domain.relevant(bel, question)
+          relevant(is.domain, bel, question)
         ) {
           const answerMove: Move = { type: "answer", content: bel };
           return () => ({
