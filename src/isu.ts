@@ -1,4 +1,4 @@
-import { createActor, setup, AnyMachineSnapshot, sendTo } from "xstate";
+import { createActor, setup, AnyMachineSnapshot, sendTo, assign } from "xstate";
 import { speechstate } from "speechstate";
 import { createBrowserInspector } from "@statelyai/inspect";
 import { KEY } from "./azure";
@@ -77,31 +77,23 @@ const dmMachine = setup({
             },
             Recognising: {
               on: {
-                RECOGNISED: {
+                LISTEN_COMPLETE: {
                   target: "Idle",
-                  actions: sendTo("dmeID", ({ event }) => ({
+                  actions: sendTo("dmeID", ({ context }) => ({
                     type: "SAYS",
                     value: {
                       speaker: "usr",
-                      moves: nlu(event.value[0].utterance),
+                      moves: context.lastUserMoves,
                     },
                   })),
                 },
+                RECOGNISED: {
+                  actions: assign(({ event }) => ({
+                    lastUserMoves: nlu(event.value[0].utterance),
+                  })),
+                },
                 ASR_NOINPUT: {
-                  target: "Idle",
-                  // FOR TESTING
-                  /*
-                  actions: sendTo("dmeID", {
-                    type: "SAYS",
-                    value: {
-                      speaker: "usr",
-                      moves: [{
-                        type: "ask",
-                        content: WHQ("favorite_food"),
-                      }],
-                    },
-                  }),
-                */
+                  // TODO
                 },
               },
             },
