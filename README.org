@@ -1,6 +1,6 @@
 * SISU: [[https://github.com/vladmaraev/speechstate][SpeechState]] meets Information State Update (ISU)
 
-The repo contains an ISU implementation based on: Kronlid, F., & Lager, T. (2007, May). [[https://archive.illc.uva.nl/semdial/proceedings/semdial2007_decalog_proceedings.pdf][Implementing the information-state update approach to dialogue management in a slightly extended SCXML]]. In Proceedings of the 11th International Workshop on the Semantics and Pragmatics of Dialogue (DECALOG) (pp. 99-106).
+The repo contains an ISU implementation described in: [[https://aclanthology.org/2025.clasp-main.3/][Combining Information State Update, Harel Statecharts and LLMs for controllable and flexible Conversational AI]] (Maraev et al., CLASP 2025)
 
 It also contains a partial implementation of the dialogue system IBiS1 (Larsson, Staffan (2002): [[https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=975e3dfccc0cf203565ea7fb370428743c1347a6][Issue-based Dialogue Management]]), including a small domain.
 
@@ -10,9 +10,13 @@ Prerequisites:
    #+begin_src 
      yarn
    #+end_src
-3. In =src/azure.ts=, insert your Azure key where marked. This is required for running the system with speech (in browser frontend), but not for automated testing (in backend).
+3. Create =src/azure.ts=, insert your Azure key where marked. This is required for running the system with speech (in browser frontend), but not for automated testing (in backend).
+   #+begin_src 
+     export const KEY = "<your_key_goes_here>"
+   #+end_src
+   
 
-Run IBiS1:
+Run SISU:
 1. Run backend in development mode:
    #+begin_src 
      yarn dev
@@ -24,4 +28,26 @@ Run IBiS1:
 Run automated tests:
 #+begin_src
  yarn test
+#+end_src
+
+
+
+** Cite this work:
+
+#+begin_src 
+@inproceedings{maraev_combining_2025,
+	author = {Vladislav Maraev and Alexander Berman and Staffan Larsson},
+	title = {Combining Information State Update, Harel Statecharts and {LLM}s for controllable and flexible Conversational {AI}},
+	editor = {Ilinykh, Nikolai  and
+      Appelgren, Mattias  and
+      Lagerstedt, Erik},
+	booktitle = {Proceedings of the 2025 CLASP Conference on Language models And RePresentations (LARP)},
+	year = {2025},
+	address = {Gothenburg, Sweden},
+	publisher = {Association for Computational Linguistics},
+	url = {https://aclanthology.org/2025.clasp-main.3/},
+	pages = {28--37},
+	ISBN = {979-8-89176-249-7},
+	abstract = {The rise of LLM-based approaches to dialogue systems has created an increased need for controllable dialogue. This paper addresses this need by presenting an implementation of a dialogue system based on information state update approach according to Larsson (2002). This enables the integration of rule-based handling of dialogue, expressed by Harel{'}s statecharts (1987), and Larsson{'}s theoretical account grounded in theories of dialogue, expressed by information state update rules. We demonstrate how our approach applies to dialogue domains involving form-filling. We also propose how LLMs can be employed to inject domain knowledge and be used in various components of a hybrid dialogue system, while maintaining control over the overall dialogue logic.}
+}
 #+end_src
