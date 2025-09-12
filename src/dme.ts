@@ -12,7 +12,7 @@ import { SaysMovesEvent, DMEEvent, DMEContext } from "./types";
 function isuTransition(
   nextState: string,
   ruleName: string,
-  sendBackNextMoves: boolean = false,
+  sendBackNextMoves: boolean = false
 ): AnyTransitionConfig {
   return {
     target: nextState,
@@ -42,7 +42,7 @@ export const dme = setup({
           type: "NEXT_MOVES",
           value: context.is.next_moves,
         };
-      },
+      }
     ),
     isu: assign(({ context }, params: { name: string }) => {
       let ruleName = params.name;
@@ -89,10 +89,8 @@ export const dme = setup({
           ],
         },
         SelectionDone: {
-          always: [
-            { actions: [ { type: "sendBackNextMoves" } ] },
-          ],
-          type: "final"
+          always: [{ actions: [{ type: "sendBackNextMoves" }] }],
+          type: "final",
         },
       },
       onDone: "Update",
@@ -151,7 +149,7 @@ export const dme = setup({
       onDone: [
         {
           target: "Select",
-          guard: "latestSpeakerIsUsr"
+          guard: "latestSpeakerIsUsr",
         },
         { target: "Update" },
       ],

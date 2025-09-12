@@ -8,7 +8,6 @@ export type Domain = {
   individuals: Individuals; // Mapping from individual to sort
 };
 
-
 export type PlanInfo = {
   type: "action" | "issue";
   content: null | Proposition | ShortAnswer | Question;
@@ -29,9 +28,7 @@ export type Question = WhQuestion;
 type WhQuestion = { type: "whq"; predicate: string };
 
 interface OtherMove {
-  type:
-    | "greet"
-    | "request";
+  type: "greet" | "request";
   content: null | string;
 }
 interface AnswerMove {
@@ -53,7 +50,7 @@ export type Action = {
     | "findout"
     | "consultDB";
   content: null | Question;
-}
+};
 
 type Speaker = "usr" | "sys";
 

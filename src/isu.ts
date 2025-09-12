@@ -160,7 +160,7 @@ dmActor.subscribe((snapshot: AnyMachineSnapshot) => {
     "%cState value:",
     "background-color: #056dff",
     snapshot.value,
-    snapshot.context.is,
+    snapshot.context.is
   );
 });
 

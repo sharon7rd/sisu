@@ -10,7 +10,7 @@ import { objectsEqual } from "./utils";
 
 type Rules = {
   [index: string]: (
-    context: TotalInformationState,
+    context: TotalInformationState
   ) => ((x: void) => InformationState) | undefined;
 };
 
@@ -220,7 +220,7 @@ export const rules: Rules = {
         const question = action.content as Question;
         const propositionFromDB = is.database.consultDB(
           question,
-          is.shared.com,
+          is.shared.com
         );
         if (propositionFromDB) {
           return () => ({
@@ -264,13 +264,13 @@ export const rules: Rules = {
       if (is.private.plan[0] && is.private.plan[0].type === "raise") {
         newIS = {
           ...is,
-          next_moves: [ ...is.next_moves, { type: "ask", content: q } ],
+          next_moves: [...is.next_moves, { type: "ask", content: q }],
           private: { ...is.private, plan: [...is.private.plan.slice(1)] },
         };
       } else {
         newIS = {
           ...is,
-          next_moves: [ ...is.next_moves, { type: "ask", content: q } ],
+          next_moves: [...is.next_moves, { type: "ask", content: q }],
         };
       }
       return () => newIS;
@@ -314,7 +314,7 @@ export const rules: Rules = {
           const answerMove: Move = { type: "answer", content: bel };
           return () => ({
             ...is,
-            next_moves: [ ...is.next_moves, answerMove ]
+            next_moves: [...is.next_moves, answerMove],
           });
         }
       }
@@ -326,7 +326,7 @@ export const rules: Rules = {
     if (is.private.agenda[0] && is.private.agenda[0].type === "greet") {
       return () => ({
         ...is,
-        next_moves: [ ...is.next_moves, is.private.agenda[0] as Move ]
+        next_moves: [...is.next_moves, is.private.agenda[0] as Move],
       });
     }
   },

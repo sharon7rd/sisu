@@ -23,7 +23,7 @@ describe("DME tests", () => {
       notify: assign(
         ({ context }, params: { speaker: string; message: string }) => {
           return { dialogue: [...context.dialogue, params] };
-        },
+        }
       ),
     },
     types: {} as {
@@ -59,7 +59,7 @@ describe("DME tests", () => {
                     moves: nlu(event.value),
                   },
                 }),
-                { delay: 1000 },
+                { delay: 1000 }
               ),
             ],
           },
@@ -74,11 +74,11 @@ describe("DME tests", () => {
                     moves: (event as NextMovesEvent).value,
                   },
                 }),
-                { delay: 1000 },
+                { delay: 1000 }
               ),
               {
                 type: "notify",
-                params: ({ event }) => ({
+                params: ({ event }: any) => ({
                   speaker: "sys",
                   message: nlg(event.value),
                 }),
@@ -119,7 +119,7 @@ describe("DME tests", () => {
         (snapshot) => snapshot.context.dialogue.length === expectedSoFar.length,
         {
           timeout: 1000 /** allowed time to transition to the expected state */,
-        },
+        }
       );
       expect(snapshot.context.dialogue).toEqual(expectedSoFar);
     });

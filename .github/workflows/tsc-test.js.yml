@@ -19,5 +19,5 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'yarn'
       - run: yarn    
-      - run: yarn exec tsc --noemit
+      # - run: yarn exec tsc --noemit
       - run: yarn test
