@@ -133,13 +133,60 @@ describe("DME tests", () => {
     ]);
   });
 
-  describe("system answer from database", () => {
+  /*describe("system answer from database", () => {
     runTest([
       { speaker: "sys", message: "Hello! You can ask me anything!" },
       { speaker: "usr", message: "Where is the lecture?" },
       { speaker: "sys", message: "Which course?" },
-      { speaker: "usr", message: "Dialogue Systems 2" },
+      { speaker: "usr", message: "dialogue systems 2" },
+      { speaker: "sys", message: "The lecture is in G212." },
+    ]);
+  });*/
+
+  //Task 1
+  describe("system answer depending on day friday", () => {
+    runTest([
+      { speaker: "sys", message: "Hello! You can ask me anything!" },
+      { speaker: "usr", message: "Where is the lecture?" },
+      { speaker: "sys", message: "Which day?" },
+      { speaker: "usr", message: "friday" },
+      { speaker: "sys", message: "Which course?" },
+      { speaker: "usr", message: "dialogue systems 2" },
       { speaker: "sys", message: "The lecture is in G212." },
     ]);
   });
+  describe("system answer depending on day tuesday", () => {
+    runTest([
+      { speaker: "sys", message: "Hello! You can ask me anything!" },
+      { speaker: "usr", message: "Where is the lecture?" },
+      { speaker: "sys", message: "Which day?" },
+      { speaker: "usr", message: "tuesday" },
+      { speaker: "sys", message: "Which course?" },
+      { speaker: "usr", message: "dialogue systems 2" },
+      { speaker: "sys", message: "The lecture is in J440." },
+    ]);
+  });
+
+  //Task 2a
+  describe("negative system contact feedback", () => {
+    runTest([
+      { speaker: "sys", message: "Hello! You can ask me anything!" },
+      { speaker: "usr", message: "*no input*" },
+      { speaker: "sys", message: "I didn't hear anything from you." },
+    ]);
+  });
+  //Task 2b
+  describe("negative feedback with repeated questions", () => {
+    runTest([
+      { speaker: "sys", message: "Hello! You can ask me anything!" },
+      { speaker: "usr", message: "*no input*" },
+      { speaker: "sys", message: "I didn't hear anything from you." },
+      { speaker: "usr", message: "Where is the lecture?" },
+      { speaker: "sys", message: "Which day?" },
+      { speaker: "usr", message: "*no input*" },
+      { speaker: "sys", message: "I didn't hear anything from you. Which day?" },
+    ]);
+  });
+  //Task 2c
+  //task3 
 });

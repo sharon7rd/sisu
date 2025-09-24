@@ -140,7 +140,18 @@ export const rules: Rules = {
     }
   },
 
+  //negative contact system feedback rule
+  integrate_no_input: ({ is }) => {
+    if (is.shared.lu!.speaker === "usr" && is.shared.lu!.moves.length === 0) {
+      return () => ({
+          ...is,
+          next_moves: [...is.next_moves, { type: "no_input", content: null }],
+        });
+      }
+    },
+
   /** TODO rule 2.7 integrate_usr_quit */
+
 
   /** TODO rule 2.8 integrate_sys_quit */
 
